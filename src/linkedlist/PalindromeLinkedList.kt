@@ -45,3 +45,5 @@ private val ListNode.lastIndex
         }
         r
     }
+
+// https://leetcode.com/problems/palindrome-linked-list/description/
