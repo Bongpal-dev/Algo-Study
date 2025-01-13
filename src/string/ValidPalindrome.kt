@@ -31,4 +31,4 @@ private fun isPalindrome(s: String): Boolean {
     return true
 }
 
-// https://leetcode.com/problems/valid-palindrome/description/
+// https://leetcode.com/problems/valid-paligindrome/description/
