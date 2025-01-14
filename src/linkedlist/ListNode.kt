@@ -11,4 +11,30 @@ class ListNode(var `val`: Int) {
         }
         node.next = ListNode(value)
     }
+
+    fun joinToString(
+        separator: CharSequence = ", ",
+        prefix: CharSequence = "",
+        postfix: CharSequence = "",
+        limit: Int = -1,
+        truncated: CharSequence = "...",
+        transform: ((Int) -> CharSequence)? = null
+    ): String {
+        var node: ListNode? = this
+        val result = mutableListOf<Int>()
+
+        while (node != null) {
+            result += node.`val`
+            node = node.next
+        }
+
+        return "[" + result.joinToString(
+            separator = separator,
+            prefix = prefix,
+            postfix = postfix,
+            limit = limit,
+            truncated = truncated,
+            transform = transform
+        ) + "]"
+    }
 }
