@@ -1,5 +1,7 @@
 package stack
 
+import kotlin.math.absoluteValue
+
 fun main() {
     val myCircularQueue = MyCircularQueue(3)
 
@@ -15,12 +17,16 @@ fun main() {
 }
 
 private class MyCircularQueue(k: Int) {
-    private val mQueue = mutableListOf<Int>()
-    private val size = k
+    private val q = IntArray(k) { -1 }
+    private var f = 0
+    private var r = -1
+    private var l = 0
 
     fun enQueue(value: Int): Boolean {
-        return if (mQueue.size < size) {
-            mQueue.add(value)
+        return if (isFull().not()) {
+            r = (r + 1) % q.size
+            q[r] = value
+            l++
             true
         } else {
             false
@@ -28,23 +34,29 @@ private class MyCircularQueue(k: Int) {
     }
 
     fun deQueue(): Boolean {
-        return mQueue.removeFirstOrNull() != null
+        return if (isEmpty().not()) {
+            f = (f + 1) % q.size
+            l--
+            true
+        } else {
+            false
+        }
     }
 
     fun Front(): Int {
-        return mQueue.firstOrNull() ?: -1
+        return if (isEmpty()) - 1 else q[f]
     }
 
     fun Rear(): Int {
-        return mQueue.lastOrNull() ?: -1
+        return if (isEmpty()) -1 else q[r]
     }
 
     fun isEmpty(): Boolean {
-        return mQueue.isEmpty()
+        return l == 0
     }
 
     fun isFull(): Boolean {
-        return mQueue.size == size
+        return l == q.size
     }
 }
 
