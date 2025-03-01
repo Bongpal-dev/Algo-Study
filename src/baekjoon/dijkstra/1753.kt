@@ -2,7 +2,6 @@ package baekjoon.dijkstra
 
 import java.io.ByteArrayInputStream
 import java.util.PriorityQueue
-import kotlin.math.min
 
 fun main() {
     val inputs = listOf(
