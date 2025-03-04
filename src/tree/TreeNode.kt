@@ -3,6 +3,13 @@ package tree
 class TreeNode(var `val`: Int) {
     var left: TreeNode? = null
     var right: TreeNode? = null
+    val height get() = calculateHeight(this)
+
+    private fun calculateHeight(node: TreeNode?): Int {
+        if (node == null) return 0
+
+        return 1 + maxOf(calculateHeight(node.left), calculateHeight(node.right))
+    }
 }
 
 fun List<Int?>.toTreeNode(): TreeNode {
