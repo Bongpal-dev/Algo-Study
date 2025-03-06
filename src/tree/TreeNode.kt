@@ -12,7 +12,9 @@ class TreeNode(var `val`: Int) {
     }
 }
 
-fun List<Int?>.toTreeNode(): TreeNode {
+fun List<Int?>.toTreeNode(): TreeNode? {
+    if (this.isEmpty()) return null
+
     val root = TreeNode(this.first()!!)
     val queue = mutableListOf<TreeNode>()
     var i = 1
@@ -30,4 +32,31 @@ fun List<Int?>.toTreeNode(): TreeNode {
     }
 
     return root
+}
+
+fun TreeNode?.toList(): List<Int?> {
+    if (this == null) return emptyList()
+
+    val result = mutableListOf<Int?>()
+    val queue = mutableListOf<TreeNode?>()
+
+    queue.add(this)
+
+    while (queue.isNotEmpty()) {
+        val current = queue.removeFirst()
+
+        if (current != null) {
+            result.add(current.`val`)
+            queue.add(current.left)
+            queue.add(current.right)
+        } else {
+            result.add(null)
+        }
+    }
+
+    while (result.isNotEmpty() && result.last() == null) {
+        result.removeLast()
+    }
+
+    return result
 }
