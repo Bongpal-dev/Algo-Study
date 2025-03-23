@@ -38,3 +38,17 @@ class ListNode(var `val`: Int) {
         ) + "]"
     }
 }
+
+fun List<Int>.toListNode(): ListNode? {
+    if (this.isEmpty()) null
+
+    val root = ListNode(0)
+    var current: ListNode? = root
+
+    this.forEach {
+        current?.next = ListNode(it)
+        current = current?.next
+    }
+
+    return root.next
+}
