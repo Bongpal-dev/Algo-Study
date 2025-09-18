@@ -68,17 +68,14 @@ private class TaskManager(tasks: List<List<Int>>) {
 
     fun execTop(): Int {
         while (pq.isNotEmpty()) {
-            val top = pq.peek()
-            val cur = map[top.id]
+            val top = pq.poll()
+            val cur = map[top.id] ?: continue
 
-            if (cur == null || cur.priority != top.priority) {
-                pq.poll()
-                continue
+            if (cur.priority == top.priority) {
+                map.remove(top.id)
+
+                return cur.id
             }
-            pq.poll()
-            map.remove(top.id)
-
-            return cur.id
         }
 
         return -1
